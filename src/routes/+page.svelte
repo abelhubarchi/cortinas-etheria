@@ -146,7 +146,7 @@
 <div class="max-w-2xl">
 <p class="font-label-caps text-label-caps text-primary mb-4 tracking-[0.3em] uppercase animate-fade-in-delay-1">CORTINAS Y PERSIANAS <br> LA PAZ - BOLIVIA</p>
 <h1 class="font-display-xl text-display-xl text-on-surface mb-6 animate-fade-in-delay-2">MUESTRA DE COLORES</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant animate-fade-in-delay-3" style="color: green; text-wrap: 20px">POR LA COMPRA DE CADA CORTINA TE REGALAREMOS LOS CINTURONES PARA CADA CORTINA, PROMOCION HASTA EL 10 DE MAYO</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant animate-fade-in-delay-3" style="color: green; text-wrap: 20px">POR LA COMPRA DE CADA CORTINA TE REGALAREMOS LOS CINTURONES PARA CADA CORTINA, PROMOCION HASTA EL 10 DE MAYO. <br> ENVIOS A TODA BOLIVIA</p>
 </div>
 
 </div>

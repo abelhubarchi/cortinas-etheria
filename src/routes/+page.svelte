@@ -165,6 +165,7 @@
 		<div 
 			class="text-center group stagger-item" 
 			on:click={() => { zoomed = true; zoomSrc = fabric.path; fabricName = fabric.name; }}
+			on:contextmenu|preventDefault
 			transition:scale={{duration: 400, delay: i * 100}}
 		>
 			<div class="relative mb-4">
@@ -174,8 +175,10 @@
 						class="w-full h-full object-cover group-hover:brightness-110 transition-all duration-500 group-hover:scale-110" 
 						src={fabric.path} 
 						loading="lazy" 
-					
+						draggable="false"
+						on:dragstart|preventDefault
 					/>
+					<div class="watermark-overlay" aria-hidden="true"></div>
 				</div>
 			</div>
 			<span class="font-label-caps text-xs tracking-widest uppercase text-on-surface-variant block mt-3 group-hover:text-primary transition-colors">{fabric.name}</span>
@@ -207,7 +210,7 @@
 
 {#if zoomed}
 <div class="zoom-overlay" on:click={() => zoomed = false} transition:fade={{duration: 300}}>
-<div class="zoom-content" on:click|stopPropagation transition:scale={{duration: 400, start: 0.8}}>
+<div class="zoom-content" on:click|stopPropagation on:contextmenu|preventDefault transition:scale={{duration: 400, start: 0.8}}>
 <button class="close-button" on:click={() => zoomed = false} aria-label="Cerrar" transition:scale={{duration: 300}}>
 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -215,7 +218,10 @@
 </svg>
 </button>
 <h2 class="zoom-title animate-slide-down">{fabricName}</h2>
-<img src={zoomSrc} class="zoomed-image animate-zoom-in" alt="Zoomed fabric" />
+<div class="zoomed-image-wrapper">
+	<img src={zoomSrc} class="zoomed-image animate-zoom-in" alt="Zoomed fabric" draggable="false" on:dragstart|preventDefault />
+	<div class="watermark-overlay zoom-watermark" aria-hidden="true"></div>
+</div>
 <button class="whatsapp-button animate-slide-up" on:click={openWhatsApp}>Consultar por WhatsApp</button>
 </div>
 </div>
@@ -472,6 +478,11 @@
 		overflow: hidden;
 	}
 
+	.image-container img {
+		user-select: none;
+		-webkit-user-drag: none;
+	}
+
 	.image-container::before {
 		content: '';
 		position: absolute;
@@ -487,6 +498,54 @@
 
 	.image-container:hover::before {
 		left: 100%;
+	}
+
+	.watermark-overlay {
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		pointer-events: none;
+		background-image:
+			repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 30px),
+			repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 30px);
+	}
+
+	.watermark-overlay::before {
+		content: "ETHERIA";
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) rotate(-30deg);
+		color: rgba(255, 255, 255, 0.55);
+		font-size: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		white-space: nowrap;
+		text-align: center;
+		width: max-content;
+		padding: 0.5rem 1rem;
+		background: rgba(0, 0, 0, 0.15);
+		border-radius: 999px;
+	}
+
+	.zoomed-image-wrapper {
+		position: relative;
+		width: 100%;
+		max-width: 100%;
+		overflow: hidden;
+	}
+
+	.zoomed-image-wrapper .zoomed-image {
+		display: block;
+		user-select: none;
+		-webkit-user-drag: none;
+	}
+
+	.zoom-watermark {
+		background-image:
+			repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 24px),
+			repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 24px);
 	}
 
 	/* Enhanced animations */

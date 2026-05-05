@@ -6,25 +6,32 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const categories = ['FLOREADO', 'MILRAYAS', 'RUSTICO', 'RUSTICO2'];
+const sourceMuestrarioPath = './MUESTRARIO';
 const staticMuestrarioPath = './static/muestrario';
 
 async function compressImages() {
   console.log('🖼️  Iniciando compresión de imágenes...\n');
 
   for (const category of categories) {
-    const categoryPath = path.join(staticMuestrarioPath, category);
+    const sourceCategoryPath = path.join(sourceMuestrarioPath, category);
+    const staticCategoryPath = path.join(staticMuestrarioPath, category);
     
-    if (!fs.existsSync(categoryPath)) {
-      console.log(`⚠️  Carpeta no encontrada: ${categoryPath}`);
+    if (!fs.existsSync(sourceCategoryPath)) {
+      console.log(`⚠️  Carpeta fuente no encontrada: ${sourceCategoryPath}`);
       continue;
     }
 
-    const files = fs.readdirSync(categoryPath).filter(file => /\.(jpg|jpeg|png)$/i.test(file));
+    // Crear carpeta destino si no existe
+    if (!fs.existsSync(staticCategoryPath)) {
+      fs.mkdirSync(staticCategoryPath, { recursive: true });
+    }
+
+    const files = fs.readdirSync(sourceCategoryPath).filter(file => /\.(jpg|jpeg|png)$/i.test(file));
     console.log(`📁 ${category}: ${files.length} imágenes`);
 
     for (const file of files) {
-      const inputPath = path.join(categoryPath, file);
-      const outputPath = path.join(categoryPath, file.replace(/\.[^.]+$/, '.webp'));
+      const inputPath = path.join(sourceCategoryPath, file);
+      const outputPath = path.join(staticCategoryPath, file.replace(/\.[^.]+$/, '.webp'));
 
       try {
         const stats = fs.statSync(inputPath);

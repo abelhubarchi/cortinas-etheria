@@ -140,7 +140,7 @@
 <main class="bg-background text-on-surface font-body-md antialiased">
 
 <main class="pt-24 pb-32 max-w-[1440px] mx-auto px-6 md:px-20 lg:px-[80px] min-h-[calc(100vh-144px)] flex flex-col justify-center" transition:fade={{duration: 800}}>
-<!-- Fabric Selection Area (Main Focus) -->
+<!-- PROMOCIO AREA) -->
 <section class="bg-transparent py-12 md:py-20 px-0">
 <div class="flex flex-col items-center text-center mb-16 gap-6" transition:fly={{y: 30, duration: 600}}>
 <div class="max-w-2xl">
@@ -511,7 +511,7 @@
 	}
 
 	.watermark-overlay::before {
-		content: "ETHERIA";
+		content: "DECORACIONES ETHERIA";
 		position: absolute;
 		top: 50%;
 		left: 50%;

@@ -1338,9 +1338,9 @@
     </div>
   </div>
   <div class="t-nav" id="tNav">
-    <div class="t-dot active" onclick="goToTestimonial(0)"></div>
-    <div class="t-dot" onclick="goToTestimonial(1)"></div>
-    <div class="t-dot" onclick="goToTestimonial(2)"></div>
+    <div class="t-dot active" on:click={() => goToTestimonial(0)}></div>
+    <div class="t-dot" on:click={() => goToTestimonial(1)}></div>
+    <div class="t-dot" on:click={() => goToTestimonial(2)}></div>
   </div>
 </section>
 

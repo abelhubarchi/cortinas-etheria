@@ -5,9 +5,5 @@
 	"/about": [
 		"src/routes/about/+page.js"
 	],
-	"/config-precios": [],
-	"/demo": [],
-	"/sverdle": [
-		"src/routes/sverdle/+page.server.js"
-	]
+	"/config-precios": []
 }

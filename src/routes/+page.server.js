@@ -1,8 +1,6 @@
 import { readdir } from 'fs/promises';
 import path from 'path';
 
-export const cacheControl = 'no-cache, no-store, must-revalidate';
-
 const categoryLabelMap = {
 	FLOREADO: 'Floreado',
 	MILRAYAS: 'Mil Rayas',
